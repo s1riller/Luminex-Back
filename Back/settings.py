@@ -1,3 +1,4 @@
+
 from pathlib import Path
 
 from django.urls import reverse_lazy
@@ -15,7 +16,21 @@ SECRET_KEY = 'django-insecure-mf84_$ev9jn0n_0i!=t$8ykb8ail4q21ntn7=$9@3ngy3u$cqk
 DEBUG = True
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+NAME_HOST = 'localhost'
+
 ALLOWED_HOSTS = ['*']
+SITE_ID = 1
+
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 # Application definition
 
@@ -27,18 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'import_export',
     'rest_framework.authtoken',
     'rest_framework',
     'djoser',
-
+    'django.contrib.sites',
     'corsheaders',
 
-
-
-
     'api'
-
-
 
 ]
 
@@ -117,13 +128,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -135,8 +148,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-
-
 AUTH_USER_MODEL = 'api.User'
 DJOSER = {
     # ...
@@ -146,3 +157,6 @@ DJOSER = {
 }
 
 LOGIN_REDIRECT_URL = reverse_lazy('api:profile')
+
+
+
